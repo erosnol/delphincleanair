@@ -1,7 +1,7 @@
 // Email notification system using Resend (recommended) or SendGrid
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 'dummy-key-for-build');
 
 interface EmailNotification {
   to: string;
@@ -25,6 +25,12 @@ export class EmailService {
 
   // Send notification to you when someone fills out a form
   async notifyAdminOfNewLead(notification: LeadNotification) {
+    // Skip email sending if no API key is available (build time)
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'dummy-key-for-build') {
+      console.log('Email service not configured - skipping notification');
+      return;
+    }
+
     const { leadType, leadData, userEmail } = notification;
     
     let subject = '';
@@ -134,6 +140,12 @@ export class EmailService {
 
   // Send confirmation email to the user
   async sendUserConfirmation(leadType: string, userData: any) {
+    // Skip email sending if no API key is available (build time)
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'dummy-key-for-build') {
+      console.log('Email service not configured - skipping confirmation');
+      return;
+    }
+
     let subject = '';
     let content = '';
 
