@@ -1,0 +1,14 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin-login/page": "app/admin-login/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/download/[filename]/route": "app/api/download/[filename]/route.js",
+  "/api/leads/route": "app/api/leads/route.js",
+  "/api/testimonials/route": "app/api/testimonials/route.js",
+  "/secure-admin-dashboard/page": "app/secure-admin-dashboard/page.js",
+  "/[locale]/affiliate/page": "app/[locale]/affiliate/page.js",
+  "/[locale]/testimonials/page": "app/[locale]/testimonials/page.js",
+  "/[locale]/admin/page": "app/[locale]/admin/page.js",
+  "/[locale]/page": "app/[locale]/page.js",
+  "/[locale]/about/page": "app/[locale]/about/page.js"
+}

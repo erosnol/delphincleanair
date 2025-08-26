@@ -1,0 +1,78 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "testimonials": "Testimonios",
+    "ebooks": "eBooks",
+    "affiliate": "Socios"
+  },
+  "hero": {
+    "headline": "Respira Puro, Vive Mejor",
+    "subheadline": "Experimenta el revolucionario sistema de purificación de aire Delphin que transforma tu hogar en un santuario de aire limpio y saludable.",
+    "ctaPrimary": "Reclama Tu Demo Gratis",
+    "ctaSecondary": "Saber Más",
+    "trustBadge": "Confiado por más de 100,000 familias en todo el mundo"
+  },
+  "freeGift": {
+    "badge": "Oferta por Tiempo Limitado",
+    "title": "Reclama Tu Evaluación GRATUITA de Calidad del Aire",
+    "subtitle": "Descubre qué hay realmente en el aire que respiras. Obtén una prueba gratuita de calidad del aire en casa y recomendaciones personalizadas.",
+    "benefits": {
+      "professional": "Evaluación Profesional",
+      "personalized": "Recomendaciones Personalizadas",
+      "noObligation": "Sin Obligación de Compra"
+    },
+    "form": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo Electrónico",
+      "phone": "Número de Teléfono",
+      "address": "Dirección de Casa",
+      "submit": "Reclamar Mi Evaluación Gratuita",
+      "submitting": "Enviando..."
+    }
+  },
+  "booking": {
+    "badge": "Reserva Tu Consulta",
+    "title": "Programa Tu Consulta Personal de Calidad del Aire",
+    "subtitle": "Conéctate con nuestros expertos en aire limpio para discutir tus necesidades específicas y descubrir la solución Delphin perfecta para tu hogar.",
+    "virtualOption": "Consulta Virtual",
+    "inPersonOption": "Visita a Domicilio",
+    "timeSlots": {
+      "morning": "Mañana (9AM - 12PM)",
+      "afternoon": "Tarde (12PM - 5PM)",
+      "evening": "Noche (5PM - 8PM)"
+    },
+    "form": {
+      "submit": "Reservar Mi Consulta",
+      "submitting": "Reservando..."
+    }
+  },
+  "ebooks": {
+    "title": "eBooks Gratuitos",
+    "subtitle": "Descarga nuestras guías completas para mejorar la calidad del aire interior",
+    "airPollution": "Guía de Contaminación del Aire Interior",
+    "allergyRelief": "Métodos Naturales de Alivio de Alergias",
+    "download": "Descargar PDF",
+    "downloadFree": "Descarga Gratuita"
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen Nuestros Clientes",
+    "subtitle": "Historias reales de familias que transformaron la calidad del aire interior con Delphin",
+    "tiktokTitle": "Síguenos en TikTok",
+    "tiktokSubtitle": "Ve Delphin en acción y obtén consejos diarios sobre calidad del aire",
+    "reviewsTitle": "Reseñas de Clientes",
+    "videosTitle": "Testimonios en Video",
+    "loadMore": "Cargar Más Reseñas",
+    "watchOnTiktok": "Ver en TikTok"
+  },
+  "affiliate": {
+    "title": "Únete a Nuestro Programa de Socios",
+    "subtitle": "Gana comisiones generosas mientras ayudas a las familias a respirar aire más limpio. Perfecto para influencers, defensores de la salud y emprendedores.",
+    "benefits": {
+      "commission": "Altas Tasas de Comisión",
+      "support": "Soporte de Marketing",
+      "training": "Entrenamiento Completo"
+    }
+  }
+}
