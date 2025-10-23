@@ -9,4 +9,4 @@
   package = "@netlify/plugin-nextjs"
 
 [context.production.environment]
-  NEXTAUTH_URL = "https://delphincleanair.com"
+  NEXTAUTH_URL = "https://delphincleanair.org"
