@@ -16,7 +16,7 @@ interface FreeGiftFormData {
   lastName: string;
   email: string;
   phone: string;
-  address: string;
+  address?: string; // Made optional
 }
 
 // Enhanced Phone Input Component
@@ -57,75 +57,21 @@ interface AddressInputFieldProps {
 }
 
 function AddressInputField({ value, onChange, placeholder, error }: AddressInputFieldProps) {
-  const {
-    ready,
-    value: addressValue,
-    suggestions: { status, data },
-    setValue,
-    clearSuggestions,
-  } = usePlacesAutocomplete({
-    requestOptions: {
-      /* Define search scope here */
-    },
-    debounce: 300,
-  });
-
-  // Sync with parent component
-  React.useEffect(() => {
-    if (value !== addressValue) {
-      setValue(value, false);
-    }
-  }, [value, addressValue, setValue]);
-
+  // Temporary fallback until Google Maps API is fully activated
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setValue(inputValue);
-    onChange(inputValue);
-  };
-
-  const handleSelect = async (description: string) => {
-    setValue(description, false);
-    onChange(description);
-    clearSuggestions();
-
-    try {
-      const results = await getGeocode({ address: description });
-      const { lat, lng } = await getLatLng(results[0]);
-      console.log('📍 Coordinates: ', { lat, lng });
-    } catch (error) {
-      console.log('😱 Error: ', error);
-    }
+    onChange(e.target.value);
   };
 
   return (
     <div className="relative">
       <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
       <input
-        value={addressValue}
+        value={value}
         onChange={handleInput}
-        disabled={!ready}
         placeholder={placeholder}
         className={`form-input pl-10 ${error ? 'border-red-500' : ''}`}
         autoComplete="street-address"
       />
-      
-      {/* Suggestions dropdown */}
-      {status === 'OK' && (
-        <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-md shadow-lg z-20 max-h-60 overflow-y-auto">
-          {data.map(({ place_id, description }) => (
-            <div
-              key={place_id}
-              className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
-              onClick={() => handleSelect(description)}
-            >
-              <div className="flex items-center">
-                <MapPin className="w-4 h-4 text-gray-400 mr-3 flex-shrink-0" />
-                <span className="text-sm text-gray-700">{description}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
@@ -349,21 +295,22 @@ export default function FreeGiftSection() {
                 <Controller
                   name="address"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{ required: false }} // Made optional
                   render={({ field: { onChange, value } }) => (
                     <AddressInputField
                       value={value || ''}
                       onChange={onChange}
-                      placeholder={t('form.address')}
+                      placeholder={locale === 'en' ? 'Home Address (Optional)' : 'Dirección de Casa (Opcional)'}
                       error={!!errors.address}
                     />
                   )}
                 />
-                {errors.address && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {locale === 'en' ? 'Address is required' : 'La dirección es requerida'}
-                  </p>
-                )}
+                <p className="text-xs text-gray-500 mt-1">
+                  {locale === 'en' 
+                    ? 'Optional - helps us schedule your consultation more efficiently' 
+                    : 'Opcional - nos ayuda a programar tu consulta de manera más eficiente'
+                  }
+                </p>
               </div>
 
               <button
