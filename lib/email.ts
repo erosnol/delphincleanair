@@ -64,17 +64,49 @@ export class EmailService {
 <head>
   <meta charset="utf-8">
   <title>New Consultation Booking</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+    .content { background: #f8fafc; padding: 30px; border-radius: 0 0 10px 10px; }
+    .info-box { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2563eb; }
+    .label { font-weight: bold; color: #1e40af; }
+    .value { margin-left: 10px; }
+    .footer { text-align: center; margin-top: 30px; color: #6b7280; }
+  </style>
 </head>
 <body>
-  <h2>New Consultation Booking</h2>
-  <p><strong>Name:</strong> ${leadData.firstName} ${leadData.lastName}</p>
-  <p><strong>Email:</strong> ${leadData.email}</p>
-  <p><strong>Phone:</strong> ${leadData.phone}</p>
-  <p><strong>Type:</strong> ${leadData.consultationType}</p>
-  <p><strong>Preferred Date:</strong> ${leadData.preferredDate}</p>
-  <p><strong>Time Slot:</strong> ${leadData.timeSlot}</p>
-  <p><strong>Message:</strong> ${leadData.message || 'None'}</p>
-  <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+  <div class="header">
+    <h1>🎯 New Consultation Request</h1>
+    <p>A new customer has booked a consultation</p>
+  </div>
+  <div class="content">
+    <div class="info-box">
+      <h3>Customer Information</h3>
+      <p><span class="label">Name:</span><span class="value">${leadData.firstName} ${leadData.lastName}</span></p>
+      <p><span class="label">Email:</span><span class="value">${leadData.email}</span></p>
+      <p><span class="label">Phone:</span><span class="value">${leadData.phone}</span></p>
+    </div>
+    <div class="info-box">
+      <h3>Consultation Details</h3>
+      <p><span class="label">Type:</span><span class="value">${leadData.consultationType}</span></p>
+      <p><span class="label">Preferred Date:</span><span class="value">${leadData.preferredDate}</span></p>
+      <p><span class="label">Time Slot:</span><span class="value">${leadData.timeSlot}</span></p>
+      ${leadData.message ? `<p><span class="label">Message:</span><span class="value">${leadData.message}</span></p>` : ''}
+    </div>
+    <div class="info-box">
+      <h3>Next Steps</h3>
+      <ul>
+        <li>Contact customer within 24 hours</li>
+        <li>Confirm consultation date and time</li>
+        <li>Prepare demonstration materials</li>
+        <li>Send calendar invite if needed</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Submitted: ${new Date().toLocaleString()}</p>
+    <p><strong>Delphin Clean Air Admin System</strong></p>
+  </div>
 </body>
 </html>`;
         break;
@@ -203,27 +235,67 @@ export class EmailService {
         break;
 
       case 'booking':
-        subject = 'Consultation Booking Confirmed!';
+        subject = '✅ Your Delphin Clean Air Consultation is Confirmed!';
         content = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>Consultation Booking Confirmed</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #059669, #047857); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+    .content { background: #f0fdf4; padding: 30px; border-radius: 0 0 10px 10px; }
+    .confirmation-box { background: white; padding: 25px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #059669; }
+    .details-box { background: #ecfdf5; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    .label { font-weight: bold; color: #047857; }
+    .value { margin-left: 10px; }
+    .next-steps { background: #fef3c7; padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b; }
+    .footer { text-align: center; margin-top: 30px; color: #6b7280; }
+    .logo { font-size: 24px; font-weight: bold; }
+  </style>
 </head>
 <body>
-  <h2>Your consultation is confirmed!</h2>
-  <p>Hi ${userData.firstName},</p>
-  <p>Thank you for booking a consultation with our clean air experts.</p>
-  
-  <h3>Booking Details:</h3>
-  <ul>
-    <li><strong>Type:</strong> ${userData.consultationType}</li>
-    <li><strong>Preferred Date:</strong> ${userData.preferredDate}</li>
-    <li><strong>Time:</strong> ${userData.timeSlot}</li>
-  </ul>
-  
-  <p>We'll contact you soon to confirm the exact time and provide any additional details.</p>
-  <p>Best regards,<br>The Delphin Clean Air Team</p>
+  <div class="header">
+    <div class="logo">🌬️ Delphin Clean Air</div>
+    <h1>Consultation Confirmed!</h1>
+    <p>Thank you for choosing cleaner, healthier air</p>
+  </div>
+  <div class="content">
+    <div class="confirmation-box">
+      <h2>Hi ${userData.firstName}! 👋</h2>
+      <p>Great news! We've received your consultation request and our clean air experts are excited to help you breathe easier.</p>
+    </div>
+    
+    <div class="details-box">
+      <h3>📋 Your Booking Details</h3>
+      <p><span class="label">Consultation Type:</span><span class="value">${userData.consultationType}</span></p>
+      <p><span class="label">Preferred Date:</span><span class="value">${userData.preferredDate}</span></p>
+      <p><span class="label">Time Preference:</span><span class="value">${userData.timeSlot}</span></p>
+      <p><span class="label">Contact Email:</span><span class="value">${userData.email}</span></p>
+    </div>
+    
+    <div class="next-steps">
+      <h3>🚀 What Happens Next?</h3>
+      <ul>
+        <li><strong>Within 24 hours:</strong> Our team will contact you to confirm your appointment</li>
+        <li><strong>Before your visit:</strong> We'll send you preparation tips and what to expect</li>
+        <li><strong>During consultation:</strong> Free air quality assessment and personalized recommendations</li>
+        <li><strong>Special bonus:</strong> Ask about our current promotions and free gifts!</li>
+      </ul>
+    </div>
+    
+    <div class="confirmation-box">
+      <h3>💬 Questions?</h3>
+      <p>Feel free to reply to this email or call us directly. We're here to help you achieve the cleanest, healthiest air possible!</p>
+      <p><strong>Phone:</strong> [Your Phone Number]<br>
+      <strong>Email:</strong> info@delphincleanair.org</p>
+    </div>
+  </div>
+  <div class="footer">
+    <p><strong>Delphin Clean Air Team</strong></p>
+    <p>Breathing life into clean air solutions</p>
+    <p style="font-size: 12px; margin-top: 20px;">This email was sent because you requested a consultation at delphincleanair.org</p>
+  </div>
 </body>
 </html>`;
         break;
