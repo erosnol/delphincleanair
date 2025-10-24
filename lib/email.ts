@@ -132,7 +132,31 @@ export class EmailService {
         break;
     }
 
+    // Fallback if content is empty
+    if (!content || content.trim() === '') {
+      content = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Lead</title>
+</head>
+<body>
+  <h2>New ${leadType} Lead</h2>
+  <p><strong>Name:</strong> ${leadData.firstName} ${leadData.lastName}</p>
+  <p><strong>Email:</strong> ${leadData.email}</p>
+  <p><strong>Details:</strong> ${JSON.stringify(leadData, null, 2)}</p>
+</body>
+</html>`;
+    }
+
     try {
+      console.log('📧 Sending admin email:', {
+        subject,
+        to: this.adminEmail,
+        contentLength: content.length,
+        contentPreview: content.substring(0, 100) + '...'
+      });
+      
       await resend.emails.send({
         from: 'Delphin Website <onboarding@resend.dev>',
         to: [this.adminEmail],
@@ -142,6 +166,7 @@ export class EmailService {
       });
     } catch (error) {
       console.error('Failed to send admin notification:', error);
+      console.error('Email content was:', content);
     }
   }
 
