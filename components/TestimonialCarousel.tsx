@@ -76,7 +76,7 @@ export default function TestimonialCarousel({
                 className="w-full h-full"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+                allowFullScreen={true}
               />
             ) : (
               <div className="flex items-center justify-center h-full">

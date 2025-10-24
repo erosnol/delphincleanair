@@ -122,7 +122,7 @@ export default function HeroSection() {
                   className="absolute inset-0 w-full h-full"
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                  allowFullScreen
+                  allowFullScreen={true}
                   title="Delphin Clean Air Demo"
                 ></iframe>
               </div>

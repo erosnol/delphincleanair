@@ -13,13 +13,17 @@ const handler = NextAuth({
       // Only allow specific admin emails
       const adminEmails = [
         'erosdelphin@gmail.com', // Add your admin email here
+        process.env.ADMIN_EMAIL, // Allow admin email from env
         // Add more admin emails as needed
-      ];
+      ].filter(Boolean); // Remove undefined values
+      
+      console.log('SignIn attempt:', { email: user.email, adminEmails });
       
       if (user.email && adminEmails.includes(user.email)) {
         return true;
       }
       
+      console.log('Access denied for:', user.email);
       return false; // Deny access for non-admin users
     },
     async session({ session, token }) {
@@ -34,6 +38,7 @@ const handler = NextAuth({
     error: '/admin-login',
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === 'development',
 })
 
 export { handler as GET, handler as POST }

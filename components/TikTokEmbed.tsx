@@ -106,7 +106,7 @@ export default function TikTokEmbed({ url, width = 325, height = 580, className 
         height={height}
         frameBorder="0"
         allow="encrypted-media"
-        allowFullScreen
+        allowFullScreen={true}
         className="rounded-lg"
         title="TikTok Video"
         loading="lazy"
