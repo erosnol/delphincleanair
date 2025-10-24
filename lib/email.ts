@@ -59,17 +59,24 @@ export class EmailService {
 
       case 'booking':
         subject = `📅 New Consultation Booking - ${leadData.firstName} ${leadData.lastName}`;
-        content = `
-          <h2>New Consultation Booking</h2>
-          <p><strong>Name:</strong> ${leadData.firstName} ${leadData.lastName}</p>
-          <p><strong>Email:</strong> ${leadData.email}</p>
-          <p><strong>Phone:</strong> ${leadData.phone}</p>
-          <p><strong>Type:</strong> ${leadData.consultationType}</p>
-          <p><strong>Preferred Date:</strong> ${leadData.preferredDate}</p>
-          <p><strong>Time Slot:</strong> ${leadData.timeSlot}</p>
-          <p><strong>Message:</strong> ${leadData.message || 'None'}</p>
-          <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
-        `;
+        content = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Consultation Booking</title>
+</head>
+<body>
+  <h2>New Consultation Booking</h2>
+  <p><strong>Name:</strong> ${leadData.firstName} ${leadData.lastName}</p>
+  <p><strong>Email:</strong> ${leadData.email}</p>
+  <p><strong>Phone:</strong> ${leadData.phone}</p>
+  <p><strong>Type:</strong> ${leadData.consultationType}</p>
+  <p><strong>Preferred Date:</strong> ${leadData.preferredDate}</p>
+  <p><strong>Time Slot:</strong> ${leadData.timeSlot}</p>
+  <p><strong>Message:</strong> ${leadData.message || 'None'}</p>
+  <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+</body>
+</html>`;
         break;
 
 
@@ -172,21 +179,28 @@ export class EmailService {
 
       case 'booking':
         subject = 'Consultation Booking Confirmed!';
-        content = `
-          <h2>Your consultation is confirmed!</h2>
-          <p>Hi ${userData.firstName},</p>
-          <p>Thank you for booking a consultation with our clean air experts.</p>
-          
-          <h3>Booking Details:</h3>
-          <ul>
-            <li><strong>Type:</strong> ${userData.consultationType}</li>
-            <li><strong>Preferred Date:</strong> ${userData.preferredDate}</li>
-            <li><strong>Time:</strong> ${userData.timeSlot}</li>
-          </ul>
-          
-          <p>We'll contact you soon to confirm the exact time and provide any additional details.</p>
-          <p>Best regards,<br>The Delphin Clean Air Team</p>
-        `;
+        content = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Consultation Booking Confirmed</title>
+</head>
+<body>
+  <h2>Your consultation is confirmed!</h2>
+  <p>Hi ${userData.firstName},</p>
+  <p>Thank you for booking a consultation with our clean air experts.</p>
+  
+  <h3>Booking Details:</h3>
+  <ul>
+    <li><strong>Type:</strong> ${userData.consultationType}</li>
+    <li><strong>Preferred Date:</strong> ${userData.preferredDate}</li>
+    <li><strong>Time:</strong> ${userData.timeSlot}</li>
+  </ul>
+  
+  <p>We'll contact you soon to confirm the exact time and provide any additional details.</p>
+  <p>Best regards,<br>The Delphin Clean Air Team</p>
+</body>
+</html>`;
         break;
 
     }
