@@ -11,7 +11,7 @@ interface EmailNotification {
 }
 
 interface LeadNotification {
-  leadType: 'air-washer-gift' | 'booking' | 'affiliate' | 'job-application';
+  leadType: 'air-washer-gift' | 'free-gift' | 'booking' | 'affiliate' | 'job-application';
   leadData: any;
   userEmail: string;
 }
@@ -38,6 +38,7 @@ export class EmailService {
 
     switch (leadType) {
       case 'air-washer-gift':
+      case 'free-gift':
         subject = `🎁 New Free Air Washer Gift Claim - ${leadData.firstName} ${leadData.lastName}`;
         content = `
           <h2>New Free Air Washer Gift Claim</h2>
@@ -215,6 +216,7 @@ export class EmailService {
 
     switch (leadType) {
       case 'air-washer-gift':
+      case 'free-gift':
         subject = 'Your Free Air Washer Gift is Confirmed!';
         content = `
           <h2>Thank you for claiming your free Air Washer gift!</h2>

@@ -6,7 +6,7 @@ interface Lead {
   lastName: string;
   email: string;
   phone: string;
-  source: 'air-washer-gift' | 'booking' | 'affiliate' | 'job-application';
+  source: 'air-washer-gift' | 'free-gift' | 'booking' | 'affiliate' | 'job-application';
   details?: any;
   createdAt: string;
 }
