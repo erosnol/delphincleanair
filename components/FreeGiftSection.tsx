@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { motion } from 'framer-motion';
@@ -8,6 +8,7 @@ import { Gift, CheckCircle, User, Mail, Phone, MapPin } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { submitLead } from '@/lib/leads';
 import PhoneInput from 'react-phone-number-input/input';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import 'react-phone-number-input/style.css';
 
 interface FreeGiftFormData {
@@ -56,21 +57,75 @@ interface AddressInputFieldProps {
 }
 
 function AddressInputField({ value, onChange, placeholder, error }: AddressInputFieldProps) {
-  // Fallback to simple input until Google Places API is properly configured
+  const {
+    ready,
+    value: addressValue,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      /* Define search scope here */
+    },
+    debounce: 300,
+  });
+
+  // Sync with parent component
+  React.useEffect(() => {
+    if (value !== addressValue) {
+      setValue(value, false);
+    }
+  }, [value, addressValue, setValue]);
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
+    const inputValue = e.target.value;
+    setValue(inputValue);
+    onChange(inputValue);
+  };
+
+  const handleSelect = async (description: string) => {
+    setValue(description, false);
+    onChange(description);
+    clearSuggestions();
+
+    try {
+      const results = await getGeocode({ address: description });
+      const { lat, lng } = await getLatLng(results[0]);
+      console.log('📍 Coordinates: ', { lat, lng });
+    } catch (error) {
+      console.log('😱 Error: ', error);
+    }
   };
 
   return (
     <div className="relative">
       <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
       <input
-        value={value}
+        value={addressValue}
         onChange={handleInput}
+        disabled={!ready}
         placeholder={placeholder}
         className={`form-input pl-10 ${error ? 'border-red-500' : ''}`}
         autoComplete="street-address"
       />
+      
+      {/* Suggestions dropdown */}
+      {status === 'OK' && (
+        <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-md shadow-lg z-20 max-h-60 overflow-y-auto">
+          {data.map(({ place_id, description }) => (
+            <div
+              key={place_id}
+              className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+              onClick={() => handleSelect(description)}
+            >
+              <div className="flex items-center">
+                <MapPin className="w-4 h-4 text-gray-400 mr-3 flex-shrink-0" />
+                <span className="text-sm text-gray-700">{description}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
