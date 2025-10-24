@@ -30,6 +30,20 @@ export async function POST(request: NextRequest) {
       details: data,
     });
 
+    // Enhanced logging for appointments
+    if (type === 'booking') {
+      console.log(`📅 APPOINTMENT DETAILS:
+        Name: ${data.firstName} ${data.lastName}
+        Email: ${data.email}
+        Phone: ${data.phone}
+        Type: ${data.consultationType}
+        Date: ${data.preferredDate}
+        Time: ${data.timeSlot}
+        Message: ${data.message || 'None'}
+        Submitted: ${new Date().toLocaleString()}
+      `);
+    }
+
     // Try Airtable (don't fail if it doesn't work)
     try {
       await leadManager.createLead(lead);
