@@ -230,7 +230,31 @@ export class EmailService {
 
     }
 
+    // Fallback if content is empty for user confirmation
+    if (!content || content.trim() === '') {
+      content = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Confirmation</title>
+</head>
+<body>
+  <h2>Thank you for your submission!</h2>
+  <p>Hi ${userData.firstName},</p>
+  <p>We've received your ${leadType} request and will be in touch soon.</p>
+  <p>Best regards,<br>The Delphin Clean Air Team</p>
+</body>
+</html>`;
+    }
+
     try {
+      console.log('📧 Sending user confirmation email:', {
+        subject,
+        to: userData.email,
+        contentLength: content.length,
+        contentPreview: content.substring(0, 100) + '...'
+      });
+      
       await resend.emails.send({
         from: 'Delphin Clean Air <onboarding@resend.dev>',
         to: [userData.email],
