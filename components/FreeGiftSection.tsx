@@ -1,12 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { Gift, CheckCircle, User, Mail, Phone, MapPin } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { submitLead } from '@/lib/leads';
+import PhoneInput from 'react-phone-number-input/input';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import 'react-phone-number-input/style.css';
 
 interface FreeGiftFormData {
   firstName: string;
@@ -16,12 +19,116 @@ interface FreeGiftFormData {
   address: string;
 }
 
+// Enhanced Phone Input Component
+interface PhoneInputFieldProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  error?: boolean;
+}
+
+function PhoneInputField({ value, onChange, placeholder, error }: PhoneInputFieldProps) {
+  return (
+    <div className="relative">
+      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
+      <PhoneInput
+        country="US"
+        value={value}
+        onChange={(val) => onChange(val || '')}
+        placeholder={placeholder}
+        className={`form-input pl-10 ${error ? 'border-red-500' : ''}`}
+        style={{
+          '--PhoneInputCountryFlag-height': '1em',
+          '--PhoneInputCountrySelectArrow-color': '#6b7280',
+        } as any}
+        inputMode="tel"
+        autoComplete="tel"
+      />
+    </div>
+  );
+}
+
+// Enhanced Address Input Component
+interface AddressInputFieldProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  error?: boolean;
+}
+
+function AddressInputField({ value, onChange, placeholder, error }: AddressInputFieldProps) {
+  const {
+    ready,
+    value: addressValue,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      /* Define search scope here */
+    },
+    debounce: 300,
+  });
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setValue(inputValue);
+    onChange(inputValue);
+  };
+
+  const handleSelect = async (description: string) => {
+    setValue(description, false);
+    onChange(description);
+    clearSuggestions();
+
+    try {
+      const results = await getGeocode({ address: description });
+      const { lat, lng } = await getLatLng(results[0]);
+      console.log('📍 Coordinates: ', { lat, lng });
+    } catch (error) {
+      console.log('😱 Error: ', error);
+    }
+  };
+
+  return (
+    <div className="relative">
+      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
+      <input
+        value={addressValue}
+        onChange={handleInput}
+        disabled={!ready}
+        placeholder={placeholder}
+        className={`form-input pl-10 ${error ? 'border-red-500' : ''}`}
+        autoComplete="street-address"
+      />
+      
+      {/* Suggestions dropdown */}
+      {status === 'OK' && (
+        <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-md shadow-lg z-20 max-h-60 overflow-y-auto">
+          {data.map(({ place_id, description }) => (
+            <div
+              key={place_id}
+              className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+              onClick={() => handleSelect(description)}
+            >
+              <div className="flex items-center">
+                <MapPin className="w-4 h-4 text-gray-400 mr-3 flex-shrink-0" />
+                <span className="text-sm text-gray-700">{description}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function FreeGiftSection() {
   const t = useTranslations('freeGift');
   const locale = useLocale();
   const [isSubmitted, setIsSubmitted] = useState(false);
   
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FreeGiftFormData>();
+  const { register, handleSubmit, control, formState: { errors, isSubmitting } } = useForm<FreeGiftFormData>();
 
   const onSubmit = async (data: FreeGiftFormData) => {
     try {
@@ -211,15 +318,19 @@ export default function FreeGiftSection() {
               </div>
 
               <div>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    {...register('phone', { required: true })}
-                    type="tel"
-                    className={`form-input pl-10 ${errors.phone ? 'border-red-500' : ''}`}
-                    placeholder={t('form.phone')}
-                  />
-                </div>
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { onChange, value } }) => (
+                    <PhoneInputField
+                      value={value || ''}
+                      onChange={onChange}
+                      placeholder={t('form.phone')}
+                      error={!!errors.phone}
+                    />
+                  )}
+                />
                 {errors.phone && (
                   <p className="text-red-500 text-sm mt-1">
                     {locale === 'en' ? 'Phone number is required' : 'El número de teléfono es requerido'}
@@ -228,14 +339,19 @@ export default function FreeGiftSection() {
               </div>
 
               <div>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    {...register('address', { required: true })}
-                    className={`form-input pl-10 ${errors.address ? 'border-red-500' : ''}`}
-                    placeholder={t('form.address')}
-                  />
-                </div>
+                <Controller
+                  name="address"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { onChange, value } }) => (
+                    <AddressInputField
+                      value={value || ''}
+                      onChange={onChange}
+                      placeholder={t('form.address')}
+                      error={!!errors.address}
+                    />
+                  )}
+                />
                 {errors.address && (
                   <p className="text-red-500 text-sm mt-1">
                     {locale === 'en' ? 'Address is required' : 'La dirección es requerida'}

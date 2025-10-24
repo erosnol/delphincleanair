@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Video, MapPin, CheckCircle, User, Mail, Phone, MessageSquare, Home } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { submitLead } from '@/lib/leads';
+import PhoneInput from 'react-phone-number-input/input';
+import 'react-phone-number-input/style.css';
 
 interface BookingFormData {
   firstName: string;
@@ -24,7 +26,7 @@ export default function BookingSection() {
   const locale = useLocale();
   const [isSubmitted, setIsSubmitted] = useState(false);
   
-  const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<BookingFormData>();
+  const { register, handleSubmit, watch, control, formState: { errors, isSubmitting } } = useForm<BookingFormData>();
   const consultationType = watch('consultationType');
 
   const onSubmit = async (data: BookingFormData) => {
@@ -251,11 +253,21 @@ export default function BookingSection() {
               </div>
 
               <div>
-                <input
-                  {...register('phone', { required: true })}
-                  type="tel"
-                  className={`form-input ${errors.phone ? 'border-red-500' : ''}`}
-                  placeholder={locale === 'en' ? 'Phone Number' : 'Número de Teléfono'}
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { onChange, value } }) => (
+                    <PhoneInput
+                      country="US"
+                      value={value || ''}
+                      onChange={(val) => onChange(val || '')}
+                      placeholder={locale === 'en' ? 'Phone Number' : 'Número de Teléfono'}
+                      className={`form-input ${errors.phone ? 'border-red-500' : ''}`}
+                      inputMode="tel"
+                      autoComplete="tel"
+                    />
+                  )}
                 />
                 {errors.phone && (
                   <p className="text-red-500 text-sm mt-1">
