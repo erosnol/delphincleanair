@@ -29,15 +29,16 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="bg-white shadow-soft sticky top-0 z-50">
+    <nav className="bg-white shadow-soft sticky top-0 z-50 border-b border-gray-100">
       <div className="container-max">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">D</span>
+          <Link href={`/${locale}`} className="flex items-center space-x-2 flex-shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm sm:text-lg">D</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">Delphin Clean Air</span>
+            <span className="text-lg sm:text-xl font-bold text-gray-900 hidden xs:block">Delphin Clean Air</span>
+            <span className="text-lg sm:text-xl font-bold text-gray-900 block xs:hidden">Delphin</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -70,7 +71,8 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 touch-manipulation"
+            aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6 text-gray-700" />
@@ -88,37 +90,37 @@ export default function Navigation() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-gray-200 bg-white"
+              className="md:hidden border-t border-gray-200 bg-white shadow-lg"
             >
-              <div className="py-4 space-y-4">
+              <div className="py-4 space-y-2">
                 {navItems.map((item) => (
                   <Link
                     key={item.key}
                     href={item.href}
-                    className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
+                    className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200 touch-manipulation text-base"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {t(item.key)}
                   </Link>
                 ))}
                 
-                <div className="px-4 py-2 border-t border-gray-200">
+                <div className="px-4 py-3 border-t border-gray-200">
                   <button
                     onClick={() => {
                       toggleLanguage();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200"
+                    className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 touch-manipulation py-2"
                   >
                     <Globe className="w-4 h-4" />
                     <span>{locale === 'en' ? 'Español' : 'English'}</span>
                   </button>
                 </div>
 
-                <div className="px-4">
+                <div className="px-4 pb-2">
                   <Link
                     href={`/${locale}#free-demo`}
-                    className="btn-primary w-full text-center block"
+                    className="btn-primary w-full text-center block py-4 text-base touch-manipulation"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {locale === 'en' ? 'Free Demo' : 'Demo Gratis'}

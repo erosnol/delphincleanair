@@ -1,0 +1,17 @@
+{
+  "name": "Delphin Clean Air",
+  "short_name": "Delphin",
+  "description": "Revolutionary air purification system that transforms your home into a sanctuary of clean, healthy air",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

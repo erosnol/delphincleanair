@@ -134,7 +134,7 @@ export default function FreeGiftSection() {
   return (
     <section id="free-demo" className="section-padding bg-white">
       <div className="container-max">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -142,19 +142,19 @@ export default function FreeGiftSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center mr-4">
-                <Gift className="w-6 h-6 text-white" />
+            <div className="flex items-center mb-4 sm:mb-6">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent-500 rounded-full flex items-center justify-center mr-3 sm:mr-4">
+                <Gift className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <span className="text-accent-600 font-semibold text-sm uppercase tracking-wide">
+              <span className="text-accent-600 font-semibold text-xs sm:text-sm uppercase tracking-wide">
                 {t('badge')}
               </span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
               {locale === 'en' ? 'Claim Your Free Gift of an Air Washer' : 'Reclama Tu Regalo Gratis de un Lavador de Aire'}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
               {locale === 'en' 
                 ? 'Experience the power of clean air with a complimentary Delphin Air Washer demonstration at your home.'
                 : 'Experimenta el poder del aire limpio con una demostración gratuita del Lavador de Aire Delphin en tu hogar.'
@@ -162,18 +162,18 @@ export default function FreeGiftSection() {
             </p>
 
             {/* Benefits */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                <span className="text-gray-700">{t('benefits.professional')}</span>
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" />
+                <span className="text-gray-700 text-sm sm:text-base">{t('benefits.professional')}</span>
               </div>
               <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                <span className="text-gray-700">{t('benefits.personalized')}</span>
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" />
+                <span className="text-gray-700 text-sm sm:text-base">{t('benefits.personalized')}</span>
               </div>
               <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                <span className="text-gray-700">{t('benefits.noObligation')}</span>
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" />
+                <span className="text-gray-700 text-sm sm:text-base">{t('benefits.noObligation')}</span>
               </div>
             </div>
 
@@ -209,20 +209,20 @@ export default function FreeGiftSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl p-8 shadow-soft"
+            className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-soft mt-8 lg:mt-0"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
               {locale === 'en' ? 'Claim Your Free Assessment' : 'Reclama Tu Evaluación Gratuita'}
             </h3>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                     <input
                       {...register('firstName', { required: true })}
-                      className={`form-input pl-10 ${errors.firstName ? 'border-red-500' : ''}`}
+                      className={`form-input pl-9 sm:pl-10 touch-manipulation ${errors.firstName ? 'border-red-500' : ''}`}
                       placeholder={t('form.firstName')}
                     />
                   </div>
@@ -235,10 +235,10 @@ export default function FreeGiftSection() {
                 
                 <div>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                     <input
                       {...register('lastName', { required: true })}
-                      className={`form-input pl-10 ${errors.lastName ? 'border-red-500' : ''}`}
+                      className={`form-input pl-9 sm:pl-10 touch-manipulation ${errors.lastName ? 'border-red-500' : ''}`}
                       placeholder={t('form.lastName')}
                     />
                   </div>

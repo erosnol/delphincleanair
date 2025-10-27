@@ -46,23 +46,23 @@ export default function AffiliateSignupSection() {
             animate={{ opacity: 1, scale: 1 }}
             className="max-w-2xl mx-auto text-center"
           >
-            <div className="w-20 h-20 bg-accent-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-white" />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-accent-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               {locale === 'en' ? 'Welcome to the Team!' : '¡Bienvenido al Equipo!'}
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8">
               {locale === 'en' 
                 ? 'Thank you for your interest in becoming a Delphin partner. Our team will review your application and contact you within 2-3 business days with next steps.'
                 : 'Gracias por tu interés en convertirte en socio de Delphin. Nuestro equipo revisará tu aplicación y te contactará dentro de 2-3 días hábiles con los próximos pasos.'
               }
             </p>
-            <div className="bg-white rounded-lg p-6 shadow-soft">
-              <h3 className="font-semibold text-gray-900 mb-2">
+            <div className="bg-white rounded-lg p-4 sm:p-6 shadow-soft">
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
                 {locale === 'en' ? 'What happens next?' : '¿Qué sigue?'}
               </h3>
-              <ul className="text-left text-gray-600 space-y-2">
+              <ul className="text-left text-gray-600 space-y-2 text-sm sm:text-base">
                 <li>✓ {locale === 'en' ? 'Application review (2-3 days)' : 'Revisión de aplicación (2-3 días)'}</li>
                 <li>✓ {locale === 'en' ? 'Partner onboarding call' : 'Llamada de incorporación de socio'}</li>
                 <li>✓ {locale === 'en' ? 'Access to marketing materials' : 'Acceso a materiales de marketing'}</li>

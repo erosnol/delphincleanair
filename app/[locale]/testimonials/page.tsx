@@ -139,13 +139,13 @@ export default function TestimonialsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       {/* Hero Section */}
-      <section className="py-20">
+      <section className="py-12 sm:py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
               {t('title')}
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
               {t('subtitle')}
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Testimonials Content */}
-      <section className="py-16 bg-white">
+      <section className="py-8 sm:py-12 md:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
             <div className="text-center py-12">
@@ -161,7 +161,7 @@ export default function TestimonialsPage() {
               <p className="text-gray-600">Loading testimonials...</p>
             </div>
           ) : (
-            <div className="space-y-16">
+            <div className="space-y-8 sm:space-y-12 md:space-y-16">
             {/* Customer Reviews */}
             {textReviews.length > 0 && (
               <div>
@@ -186,8 +186,8 @@ export default function TestimonialsPage() {
             {/* TikTok Videos Section */}
             {testimonials.some(t => t.fields['TikTok URL']) && (
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">TikTok Reviews</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">TikTok Reviews</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {testimonials
                     .filter(t => t.fields['TikTok URL'])
                     .map(testimonial => (
@@ -209,7 +209,7 @@ export default function TestimonialsPage() {
 
             {/* Fallback to sample data if no testimonials */}
             {testimonials.length === 0 && (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 <div>
                   <TestimonialCarousel items={sampleTextReviews} title="Customer Reviews" />
                 </div>
@@ -225,28 +225,28 @@ export default function TestimonialsPage() {
       </section>
 
       {/* TikTok CTA Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl p-8 text-white text-center">
+          <div className="bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
                 <TikTokIcon className="w-12 h-12" />
               </div>
             </div>
             
-            <h3 className="text-2xl font-bold mb-4">@d2drookie</h3>
-            <p className="text-pink-100 mb-8 max-w-2xl mx-auto">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">@DelphinCleanAir</h3>
+            <p className="text-pink-100 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base">
               Follow us for daily air quality tips, product demonstrations, and behind-the-scenes content. 
               See real Delphin demonstrations and learn how to improve your indoor air quality naturally.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
-                href="https://tiktok.com/@d2drookie"
+                href="https://tiktok.com/@DelphinCleanAir"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-pink-600 font-semibold py-3 px-8 rounded-lg hover:bg-pink-50 transition-colors duration-200 flex items-center justify-center"
+                className="bg-white text-pink-600 font-semibold py-3 px-6 sm:px-8 rounded-lg hover:bg-pink-50 transition-colors duration-200 flex items-center justify-center touch-manipulation text-sm sm:text-base"
               >
                 <TikTokIcon className="w-5 h-5 mr-2" />
                 {t('watchOnTiktok')}
@@ -255,7 +255,7 @@ export default function TestimonialsPage() {
                 href="https://beacons.ai/delphincleanair"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white/20 text-white font-semibold py-3 px-8 rounded-lg hover:bg-white/30 transition-colors duration-200 flex items-center justify-center"
+                className="bg-white/20 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg hover:bg-white/30 transition-colors duration-200 flex items-center justify-center touch-manipulation text-sm sm:text-base"
               >
                 <ExternalLink className="w-5 h-5 mr-2" />
                 All Our Links

@@ -8,6 +8,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '375px',    // iPhone SE, iPhone 12 mini
+        'sm': '640px',    // Default small
+        'md': '768px',    // Default medium
+        'lg': '1024px',   // Default large
+        'xl': '1280px',   // Default extra large
+        '2xl': '1536px',  // Default 2x extra large
+        // Custom device-specific breakpoints
+        'iphone-se': '375px',
+        'iphone-12': '390px',
+        'iphone-14-pro-max': '430px',
+        'pixel-7': '412px',
+        'galaxy-s8': '360px',
+        'galaxy-s20': '384px',
+        'ipad-mini': '768px',
+        'ipad-air': '820px',
+        'ipad-pro': '1024px',
+      },
       colors: {
         primary: {
           50: '#eff6ff',
