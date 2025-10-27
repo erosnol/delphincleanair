@@ -20,7 +20,7 @@ export default function HeroSection() {
         <div className="absolute -top-10 -left-10 w-40 h-40 sm:w-80 sm:h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
         <div className="absolute -bottom-10 -right-10 w-40 h-40 sm:w-80 sm:h-80 bg-secondary-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-1000"></div>
         {/* Additional coverage for mobile */}
-        <div className="absolute top-1/4 right-0 w-32 h-32 sm:w-60 sm:h-60 bg-accent-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse delay-500"></div>
+        <div className="absolute top-1/4 -right-8 w-32 h-32 sm:w-60 sm:h-60 bg-accent-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse delay-500"></div>
       </div>
 
       <div className="relative container-max py-8 sm:py-12 md:py-16 lg:py-24">

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Facebook } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Navigation() {
@@ -53,6 +53,17 @@ export default function Navigation() {
               </Link>
             ))}
             
+            {/* Social Media */}
+            <a
+              href="https://www.facebook.com/profile.php?id=61582037910455"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100"
+              aria-label="Visit our Facebook page"
+            >
+              <Facebook className="w-5 h-5" />
+            </a>
+
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
@@ -104,13 +115,26 @@ export default function Navigation() {
                   </Link>
                 ))}
                 
-                <div className="px-4 py-3 border-t border-gray-200">
+                <div className="px-4 py-3 border-t border-gray-200 space-y-3">
+                  {/* Facebook Link */}
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61582037910455"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 touch-manipulation py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Facebook className="w-5 h-5" />
+                    <span>Facebook</span>
+                  </a>
+
+                  {/* Language Toggle */}
                   <button
                     onClick={() => {
                       toggleLanguage();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 touch-manipulation py-2"
+                    className="flex items-center space-x-3 text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 touch-manipulation py-2"
                   >
                     <Globe className="w-4 h-4" />
                     <span>{locale === 'en' ? 'Español' : 'English'}</span>

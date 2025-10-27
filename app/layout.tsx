@@ -26,6 +26,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='white'/><path d='M8 12c0-1 1-2 2.5-2.5C12 9 14 8.5 16 9c2 0.5 4 1.5 5 3 0.5 0.8 0.5 1.5 0 2-0.3 0.3-0.8 0.5-1.2 0.3-0.2-0.1-0.3-0.3-0.3-0.5 0-0.2 0.1-0.4 0.3-0.5 0.1-0.1 0.2-0.1 0.3-0.1s0.2 0 0.2 0.1c0 0.1-0.1 0.1-0.2 0.1h-0.1c-0.1 0-0.1 0.1-0.1 0.1s0 0.1 0.1 0.1c0.2 0 0.4-0.1 0.5-0.3 0.2-0.3 0.1-0.7-0.2-0.9-0.5-0.3-1.2-0.1-1.5 0.4-0.2 0.3-0.2 0.7 0 1 0.3 0.4 0.8 0.6 1.3 0.5 1-0.2 1.8-1 2-2 0.1-0.5 0-1-0.3-1.4-0.8-1.2-2.5-2-4-2.3-1.5-0.3-3 0-4.2 0.8C9.2 10.5 8.5 11.2 8 12z' fill='%231e3a8a'/><circle cx='18' cy='12' r='0.8' fill='white'/><circle cx='18.2' cy='11.8' r='0.3' fill='%231e3a8a'/><path d='M4 20c2-1 4 1 6 0s4-1 6 0 4 1 6 0 4-1 6 0' stroke='%231e3a8a' stroke-width='1.5' fill='none'/><path d='M4 23c2-1 4 1 6 0s4-1 6 0 4 1 6 0 4-1 6 0' stroke='%231e3a8a' stroke-width='1.5' fill='none'/><path d='M4 26c2-1 4 1 6 0s4-1 6 0 4 1 6 0 4-1 6 0' stroke='%231e3a8a' stroke-width='1.5' fill='none'/></svg>" />
         {process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY && (
           <script
